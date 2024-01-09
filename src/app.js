@@ -5,6 +5,7 @@ const handlebarsHelpers = require('handlebars-helpers')(); // Tambahkan ini
 const fetchNews = require('./utils/berita');
 const path = require("path");
 const nodemailer = require("nodemailer");
+const bodyParser = require('body-parser');
 
 
 
@@ -19,6 +20,9 @@ app.set("view engine", "hbs");
 // Mengatur direktori untuk file statis
 const direktoriPublic = path.join(__dirname, "../public");
 app.use(express.static(direktoriPublic));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Mengatur direktori views dan partials untuk Handlebars
 const direktoriViews = path.join(__dirname, "../templates/views");
@@ -151,15 +155,15 @@ app.post("/lapor", (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "",
-      pass: "",
+      user: "siptyasavirarahmi1@gmail.com",
+      pass: "ytnzikfqcppjvmtd",
     },
   });
 
   // Konfigurasi email
   const mailOptions = {
-    from: "",
-    to: "",
+    from: "siptyasavirarahmi1@gmail.com",
+    to: "siptyasavirarahmi1@gmail.com",
     subject: "Laporan Pengguna",
     text: `Nama: ${nama}\nEmail: ${email}\nPesan: ${pesan}`,
   };
